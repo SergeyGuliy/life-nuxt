@@ -1,5 +1,5 @@
 <template>
-  <div class="mainLayout">
+  <div class="layout__main layout">
     <nuxt />
   </div>
 </template>
@@ -16,9 +16,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style lang='scss'>
-  .mainLayout {
-
-  }
-</style>

@@ -12,7 +12,9 @@ export default {
     ]
   },
 
-  css: [],
+  css: [
+    '@/assets/css/global.scss'
+  ],
 
   plugins: [],
 
@@ -39,8 +41,8 @@ export default {
 
   styleResources: {
     scss: [
-      '~/assets/styles/global/variables.scss',
-      '~/assets/styles/global/breakpoints.scss'
+      '~/assets/css/misc/variables.scss',
+      '~/assets/css/misc/breakpoints.scss'
     ]
   },
 

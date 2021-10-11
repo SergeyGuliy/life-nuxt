@@ -1,0 +1,11 @@
+.layout {
+  @apply min-w-full w-auto min-h-screen h-full;
+}
+
+.layout__main{
+  @apply bg-black;
+}
+
+.layout__auth{
+  @apply bg-transparent flex flex-col justify-center content-center;
+}

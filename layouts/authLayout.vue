@@ -1,5 +1,5 @@
 <template>
-  <div class="authLayout">
+  <div class="layout__auth layout">
     <nuxt />
   </div>
 </template>
@@ -16,9 +16,3 @@ export default Vue.extend({
   }
 })
 </script>
-
-<style lang='scss'>
-  .authLayout {
-
-  }
-</style>
