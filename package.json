@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-sandbox",
+  "name": "life-nuxt",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -16,10 +16,12 @@
     "*.{js,vue}": "eslint"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.4.1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7"
+    "nuxt": "^2.15.7",
+    "nuxt-svg-loader": "^1.2.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",

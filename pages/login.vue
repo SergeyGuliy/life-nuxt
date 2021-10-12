@@ -23,8 +23,8 @@
 export default {
   name: 'Login',
   components: {
-    'm-card': () => import('../components/UI/m-card'),
-    'm-btn': () => import('../components/UI/m-btn')
+    'm-card': () => import('../components/UI/m-card.vue'),
+    'm-btn': () => import('../components/UI/m-btn.vue')
   },
   layout: 'authLayout',
   data () {

@@ -1,4 +1,4 @@
-# nuxt-sandbox
+# life-nuxt
 
 ## Build Setup
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <m-card />
+    <m-header />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'Home',
   components: {
-    'm-card': () => import('../components/UI/m-card')
+    'm-header': () => import('../components/layouts/m-header.vue')
   },
   layout: 'mainLayout',
   data () {
