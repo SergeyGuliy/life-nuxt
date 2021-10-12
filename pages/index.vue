@@ -1,6 +1,21 @@
 <template>
-  <div>
+  <div class="home">
     <m-header />
+    <GmapMap
+      :center="{lat:10, lng:10}"
+      :zoom="7"
+      class="home__map"
+      map-type-id="terrain"
+    >
+      <!--      <GmapMarker-->
+      <!--              :key="index"-->
+      <!--              v-for="(m, index) in markers"-->
+      <!--              :position="m.position"-->
+      <!--              :clickable="true"-->
+      <!--              :draggable="true"-->
+      <!--              @click="center=m.position"-->
+      <!--      />-->
+    </GmapMap>
   </div>
 </template>
 
@@ -19,21 +34,12 @@ export default Vue.extend({
 })
 </script>
 
-<!--<style lang="scss">-->
-<!--  body {-->
-<!--    background-color: $base-color;-->
-
-<!--    @include xl {-->
-<!--      background-color: #7F828B;-->
-<!--    }-->
-<!--    @include lg {-->
-<!--      background-color: orangered;-->
-<!--    }-->
-<!--    @include md {-->
-<!--      background-color: green;-->
-<!--    }-->
-<!--    @include sm {-->
-<!--      background-color: red;-->
-<!--    }-->
-<!--  }-->
-<!--</style>-->
+<style lang="scss">
+.home{
+  @apply min-w-full w-auto min-h-screen h-full flex flex-col;
+  .home__map {
+    @apply flex-auto;
+    height: calc(100% - 64px);
+  }
+  }
+</style>

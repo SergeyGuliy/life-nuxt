@@ -16,7 +16,9 @@ export default {
     '@/assets/css/global.scss'
   ],
 
-  plugins: [],
+  plugins: [
+    '~/plugins/google_maps'
+  ],
 
   components: false,
 
@@ -55,6 +57,7 @@ export default {
   },
 
   build: {
+    transpile: [/^vue2-google-maps($|\/)/],
     loaders: {
       sass: {
         implementation: require('sass')
