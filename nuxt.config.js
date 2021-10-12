@@ -33,6 +33,7 @@ export default {
   ],
 
   axios: {},
+
   svgLoader: {
     svgoConfig: {
       plugins: [
