@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 
+import GmapCluster from 'vue2-google-maps/dist/components/cluster'
+
+Vue.component('GmapCluster', GmapCluster)
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAJ9ygJHLyJX8-nEja3tu4gJMmJjGHJFbk',
@@ -21,4 +25,4 @@ Vue.use(VueGoogleMaps, {
   /// / Vue.component('GmapMarker', GmapMarker)
   /// / then disable the following:
   // installComponents: true,
-})
+}) // replace src with dist if you have Babel issues
