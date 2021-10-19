@@ -16,9 +16,7 @@
         @click="addMarket"
       >
         <template #visible="">
-          <div class="className" @click="isEditMode = !isEditMode">
-            <img src="../static/images/marker.png" alt="">
-          </div>
+          <GmapAddGeo v-model="isEditMode"/>
         </template>
         <GmapCluster v-if="isEditMode" @click="clusterClick">
           <template v-for="(m, index) in markers">
@@ -52,41 +50,12 @@
 </template>
 
 <script>
-const DEFAULT_POINTS_COUNT = 15
-const DEFAULT_ZOOM = 5
-
-function createPoint (lat = (+Math.random()) * 100, lng = (+Math.random()) * 100) {
-  return { position: { lat, lng } }
-}
-
-function createDefaultPoints (count = DEFAULT_POINTS_COUNT) {
-  if (count < 1) { return [] }
-  return Array.from(Array(count).keys()).map((_) => {
-    return createPoint()
-  })
-}
-const DEFAULT_MAP_OPTIONS = {
-  zoomControl: true,
-  mapTypeControl: false,
-  scaleControl: false,
-  streetViewControl: false,
-  rotateControl: true,
-  fullscreenControl: false,
-  disableDefaultUi: false,
-  zoomControlOptions: {
-    position: 6
-  },
-  streetViewControlOptions: {
-    position: 6
-  },
-  mapTypeControlOptions: {
-    position: 6
-  }
-}
-
+import { createDefaultPoints, createPoint, DEFAULT_MAP_OPTIONS, DEFAULT_ZOOM } from '../helpers/map'
 export default {
   name: 'MMap',
-  components: {},
+  components: {
+    GmapAddGeo: () => import('./map/GmapAddGeo')
+  },
   data () {
     return {
       activeMarker: null,
@@ -144,30 +113,5 @@ export default {
   .v-map {
     @apply flex-auto;
     height: calc(100% - 64px);
-  }
-  .className{
-    cursor: pointer;
-    background: rgb(255, 255, 255);
-    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
-    border-color: rgba(229, 231, 235, var(--tw-border-opacity));
-    height: 40px;
-    width: 40px;
-    position: absolute;
-    bottom: 140px;
-    left: 10px;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img{
-      max-height: 28px;
-      max-width: 28px;
-      opacity: 0.6;
-    }
-  }
-  .className:hover{
-    img{
-      opacity: 0.85;
-    }
   }
 </style>
