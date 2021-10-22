@@ -90,13 +90,15 @@ export default {
   },
   data () {
     return {
-      activeMarker: null,
+      map: null,
       zoom: null,
       basicCords: null,
       activeCords: null,
       DEFAULT_MAP_OPTIONS,
+      activeMarker: null,
+
       visibleMarkers: createDefaultPoints(),
-      map: null,
+
       isCreationMode: false,
       createdMarkers: []
     }
@@ -117,12 +119,13 @@ export default {
   },
   methods: {
     geoSubmit () {
-      console.log('geoSubmit')
       this.isCreationMode = false
+      this.visibleMarkers.push(...this.createdMarkers)
+      this.createdMarkers = []
     },
     geoCancel () {
-      console.log('geoCancel')
       this.isCreationMode = false
+      this.createdMarkers = []
     },
     setBasicCoords (coords) {
       this.activeCords = coords
