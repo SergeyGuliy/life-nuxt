@@ -1,11 +1,12 @@
 <template>
   <div>
     <pre style="color: white">{{ activeCords }}</pre>
-    <pre style="color: white">{{ isEditMode }}</pre>
+    <pre style="color: white">{{ isCreationMode }}</pre>
     <client-only>
       <GmapMap
         ref="mapRef"
         class="v-map"
+        :class="{'v-map--cell': isCreationMode}"
         map-type-id="terrain"
         :center="basicCords"
         :zoom="zoom"
@@ -16,10 +17,41 @@
         @click="addMarket"
       >
         <template #visible="">
-          <GmapAddGeo v-model="isEditMode"/>
+          <GmapAddGeo
+            :is-creation-mode="isCreationMode"
+            @geoInitCreation="isCreationMode = true"
+            @geoSubmit="geoSubmit"
+            @geoCancel="geoCancel"
+          />
         </template>
-        <GmapCluster v-if="isEditMode" @click="clusterClick">
-          <template v-for="(m, index) in markers">
+        <GmapCluster v-if="!isCreationMode" @click="clusterClick">
+          <template v-for="(m, index) in visibleMarkers">
+            <GmapInfoWindow
+              v-if="activeMarker === index"
+              :key="index"
+              :position="m.position"
+              :clickable="true"
+              :draggable="false"
+              @closeclick="activeMarker = null"
+            >
+              <template #default="">
+                <h1 style="width: 50px">
+                  {{ m }}
+                </h1>
+              </template>
+            </GmapInfoWindow>
+            <GmapMarker
+              v-else
+              :key="index"
+              :position="m.position"
+              :clickable="true"
+              :draggable="false"
+              @click="activateMarker(index)"
+            />
+          </template>
+        </GmapCluster>
+        <GmapCluster v-else @click="clusterClick">
+          <template v-for="(m, index) in createdMarkers">
             <GmapInfoWindow
               v-if="activeMarker === index"
               :key="index"
@@ -63,9 +95,10 @@ export default {
       basicCords: null,
       activeCords: null,
       DEFAULT_MAP_OPTIONS,
-      markers: createDefaultPoints(),
+      visibleMarkers: createDefaultPoints(),
       map: null,
-      isEditMode: false
+      isCreationMode: false,
+      createdMarkers: []
     }
   },
   mounted () {
@@ -83,6 +116,14 @@ export default {
     }, 0)
   },
   methods: {
+    geoSubmit () {
+      console.log('geoSubmit')
+      this.isCreationMode = false
+    },
+    geoCancel () {
+      console.log('geoCancel')
+      this.isCreationMode = false
+    },
     setBasicCoords (coords) {
       this.activeCords = coords
       this.map.panTo(coords)
@@ -94,13 +135,14 @@ export default {
     },
     activateMarker (index) {
       this.activeMarker = index
-      this.setBasicCoords(this.markers[index].position)
+      this.setBasicCoords(this.visibleMarkers[index].position)
     },
     clusterClick ({ center_ }) {
       this.setBasicCoords({ lat: center_.lat(), lng: center_.lng() })
     },
     addMarket (click) {
-      this.markers.push(createPoint(click.latLng.lat(), click.latLng.lng()))
+      if (!this.isCreationMode) { return }
+      this.createdMarkers.push(createPoint(click.latLng.lat(), click.latLng.lng()))
     },
     zoomChanged (zoom) {
       this.setZoom(zoom)
@@ -113,5 +155,10 @@ export default {
   .v-map {
     @apply flex-auto;
     height: calc(100% - 64px);
+  }
+  .v-map--cell{
+    div[aria-roledescription="map"]{
+      cursor: cell !important;
+    }
   }
 </style>

@@ -8,7 +8,11 @@ module.exports = {
   ],
   darkMode: false,
   theme: {
-    extend: {}
+    extend: {
+      maxWidth: {
+        7: '1.75rem'
+      }
+    }
   },
   variants: {
     extend: {}

@@ -12,6 +12,9 @@
     "lint": "npm run lint:js",
     "test": "jest"
   },
+  "nuxt": {
+    "port": 8080
+  },
   "lint-staged": {
     "*.{js,vue}": "eslint"
   },

@@ -1,15 +1,29 @@
 <template>
-  <div class="className" @click="$emit('input', !value)">
-    <img src="../../static/images/marker.png" alt="">
+  <div class="v-map-addgeo">
+    <button v-if="!isCreationMode" class="v-map-addgeo--button" @click="$emit('geoInitCreation')">
+      <IconLocationMarket />
+    </button>
+    <template v-else>
+      <button class="v-map-addgeo--button" @click="$emit('geoSubmit')">
+        <IconDocumentAdd />
+      </button>
+      <button class="v-map-addgeo--button" @click="$emit('geoCancel')">
+        <IconDocumentRemove />
+      </button>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
   name: 'GmapAddGeo',
-  components: {},
+  components: {
+    IconDocumentAdd: () => import('../../assets/svg/document-add.svg'),
+    IconDocumentRemove: () => import('../../assets/svg/document-remove.svg'),
+    IconLocationMarket: () => import('../../assets/svg/location-market.svg')
+  },
   props: {
-    value: {
+    isCreationMode: {
       type: Boolean,
       required: true
     }
@@ -21,28 +35,21 @@ export default {
 </script>
 
 <style lang='scss'>
-  .className{
-    cursor: pointer;
-    background: rgb(255, 255, 255);
-    box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
-    height: 40px;
-    width: 40px;
+  .v-map-addgeo{
+    @apply absolute;
     position: absolute;
     bottom: 140px;
     left: 10px;
-    border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img{
-      max-height: 28px;
-      max-width: 28px;
-      opacity: 0.6;
+    .v-map-addgeo--button{
+      @apply cursor-pointer bg-white h-10 w-10 border-2 flex justify-center items-center;
+      box-shadow: rgb(0 0 0 / 30%) 0px 1px 4px -1px;
+      svg{
+        @apply opacity-60 max-h-7 max-w-7;
+      }
     }
-  }
-  .className:hover{
-    img{
-      opacity: 0.85;
+
+    .v-map-addgeo--button:hover svg{
+        @apply opacity-80;
     }
   }
 </style>
